@@ -1,0 +1,35 @@
+h1 {
+    text-align: center;
+}
+p {
+    text-align: center;
+}
+.subreddit-search {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+.subreddit-search > input {
+    text-align: center;
+    padding: .25em;
+    border: 1px solid #444;
+    border-radius: 2em;
+    font-size: 1rem;
+    outline: none;
+}
+.subreddit-search > button {
+    width: 33%;
+    border: 1px solid #444;
+    border-radius: 2rem;
+    background-color: #EEE;
+    padding: .25rem;
+    margin: .75rem auto 1.5rem auto;
+    cursor: pointer;
+    outline: none;
+}
+.subreddit-search > button:hover,
+.subreddit-search > button:focus {
+    background-color: #444;
+    color: #EEE;
+}

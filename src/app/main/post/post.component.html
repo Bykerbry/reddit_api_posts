@@ -1,0 +1,6 @@
+<div *ngIf="index < 10" class="post-container">
+    <h3> {{ post.title }} </h3>
+    <img *ngIf="isUrl(post.thumbnail)" [src]="post.thumbnail" alt="thumbnail" [ngStyle]="getImgSize(post)">
+    <p *ngIf="!isUrl(post.thumbnail)"> No image available </p>
+    <a [href]="post.url" target="_blank">See post here</a>
+</div>

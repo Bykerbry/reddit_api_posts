@@ -1,0 +1,17 @@
+<!-- cSpell: words subreddit -->
+
+<h1>Subreddit "{{ subredditTitle }}" Posts</h1>
+<div class="subreddit-search">
+    <input type="text" 
+        [(ngModel)]="subreddit"
+        (key.enter)='getSubreddit(subreddit)'
+        placeholder="Type Subreddit Name">
+    <button (click)='getSubreddit(subreddit)'> Search </button>
+</div>
+<p><strong *ngIf="!data">Loading...</strong></p>
+<div *ngIf='data'>
+        <app-post *ngFor="let post of postData; let i = index" 
+            [index]='i' 
+            [post]='post.data'>
+        </app-post>
+</div> 
