@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { PostService } from '../post.service'
 
 @Component({
   selector: 'app-main',
@@ -13,8 +13,9 @@ export class MainComponent implements OnInit {
   data: any;
   postData: any[];
   subredditTitle: string;
+  error: boolean;
 
-  constructor(private http: HttpClient) { }
+  constructor(private _postService: PostService) { }
 
   ngOnInit() {
     this.getSubreddit('aww')
@@ -22,10 +23,13 @@ export class MainComponent implements OnInit {
   getSubreddit(subreddit: string) {
     this.subredditTitle = subreddit.substring(0,1).toUpperCase() + subreddit.substring(1);
     subreddit = subreddit.replace(' ', '')
-    this.http.get('https://www.reddit.com/r/' + subreddit + '/.json').subscribe( response => {
+    this._postService.getPosts(subreddit).subscribe( response => {
         this.data = response;
         this.postData = this.data.data.children;
+        this.error = false;
+    }, error => {
+      this.error = true;
+      console.log(error)
     })
   }
-
 }

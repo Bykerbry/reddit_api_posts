@@ -8,10 +8,8 @@
         placeholder="Type Subreddit Name">
     <button (click)='getSubreddit(subreddit)'> Search </button>
 </div>
+<p *ngIf="error" style="color: red">That subreddit does not exist</p>
 <p><strong *ngIf="!data">Loading...</strong></p>
 <div *ngIf='data'>
-        <app-post *ngFor="let post of postData; let i = index" 
-            [index]='i' 
-            [post]='post.data'>
-        </app-post>
+    <app-post *ngFor="let post of postData;" [post]='post.data'></app-post>
 </div> 
