@@ -2,11 +2,24 @@
 
 <h1>Subreddit "{{ subredditTitle }}" Posts</h1>
 <div class="subreddit-search">
-    <input type="text" 
-        [(ngModel)]="subreddit"
-        (key.enter)='getSubreddit(subreddit)'
-        placeholder="Type Subreddit Name">
-    <button (click)='getSubreddit(subreddit)'> Search </button>
+    <mat-form-field style="text-align: center;">
+        <input type="text" 
+        #search
+        matInput
+        [formControl]="subredditControl"
+        [matAutocomplete]='auto'
+        (keyup.enter)='getSubreddit(subredditControl.value); search.value = ""; search.blur()'
+        (keyup)='getSuggestions(subredditControl.value)'
+        placeholder="Type Subreddit Name Here">
+        <mat-autocomplete #auto='matAutocomplete'>
+            <mat-option *ngFor="let suggestion of suggestionsArr" 
+                (click)='getSubreddit(suggestion); search.value = ""; search.blur()'
+                [value]='suggestion'>
+                    {{ suggestion }}
+                </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <button (click)='getSubreddit(subredditControl.value); search.value = ""'> Search </button>
 </div>
 <p *ngIf="error" style="color: red">That subreddit does not exist</p>
 <p><strong *ngIf="!data">Loading...</strong></p>

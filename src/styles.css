@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 html, body {
     background-image: linear-gradient(to right, #EEE, #AAA);
     font-family: 'Open Sans', sans-serif;
     color: #444;
+}
+
+.mat-focused .mat-form-field-label {
+    color: #444 !important;
+}
+.mat-form-field-ripple {
+    background-color: #444 !important;
 }
