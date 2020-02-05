@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { IPost } from 'src/app/post.interface';
 
 @Component({
   selector: 'app-post',
@@ -7,15 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PostComponent implements OnInit {
 
-  @Input() post: any;
+  @Input() post: IPost;
  
-
   constructor() { }
 
-  getImgSize(post: any) {
+  getImgSize(post: IPost) {
     return {
-      height: `${post.thumbnail_height}px`,
-      width: `${post.thumbnail_width}px`
+      height: `${post.imgH}px`,
+      width: `${post.imgW}px`
+      // height: `${post.thumbnail_height}px`,
+      // width: `${post.thumbnail_width}px`
     }
   }
   isUrl(url: string) {

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PostService } from '../post.service';
 import { FormControl } from '@angular/forms'
 import { MatAutocompleteTrigger } from '@angular/material';
+import { Observable } from 'rxjs';
+import { IPost } from '../post.interface';
 
 @Component({
   selector: 'app-main',
@@ -12,10 +14,8 @@ import { MatAutocompleteTrigger } from '@angular/material';
 // cSpell: words subreddit subreddits
 export class MainComponent implements OnInit {
 
-  data: any;
-  postData: any[];
+  postArr$: Observable<IPost[]>
   subredditTitle: string;
-  error: boolean;
 
   suggestions: any;
   suggestionsArr: string[];
@@ -32,14 +32,7 @@ export class MainComponent implements OnInit {
   getSubreddit(subreddit: string) {
     this.subredditTitle = subreddit.substring(0,1).toUpperCase() + subreddit.substring(1);
     subreddit = subreddit.replace(' ', '');
-    this._postService.getPosts(subreddit).subscribe( response => {
-        this.data = response;
-        this.postData = this.data.data.children;
-        this.error = false;
-    }, error => {
-      this.error = true;
-      console.log(error);
-    });
+    this.postArr$ = this._postService.getPosts(subreddit)
     this.autocomplete.closePanel();
   };
 

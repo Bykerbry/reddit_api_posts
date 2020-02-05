@@ -22,7 +22,7 @@
     <button (click)='getSubreddit(subredditControl.value); search.value = ""'> Search </button>
 </div>
 <p *ngIf="error" style="color: red">That subreddit does not exist</p>
-<p><strong *ngIf="!data">Loading...</strong></p>
-<div *ngIf='data'>
-    <app-post *ngFor="let post of postData;" [post]='post.data'></app-post>
+<p><strong *ngIf="!(postArr$ | async)">Loading...</strong></p>
+<div *ngIf='(postArr$ | async)'>
+    <app-post *ngFor="let post of postArr$ | async;" [post]='post'></app-post>
 </div> 
